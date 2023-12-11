@@ -12,6 +12,8 @@ import edu.byu.cs.tweeter.server.dao.dynamodb.DDBFollowDAO;
 import edu.byu.cs.tweeter.server.dao.dynamodb.DDBStatusDAO;
 import edu.byu.cs.tweeter.server.lambda.interfaces.ServerHandler;
 import edu.byu.cs.tweeter.server.service.StatusService;
+import edu.byu.cs.tweeter.server.sqs.JsonSerializer;
+import edu.byu.cs.tweeter.server.sqs.SqsClient;
 
 /**
  * An AWS lambda function that posts a status to a user returns  the user object and an auth code for
@@ -21,8 +23,12 @@ public class PostStatusHandler extends ServerHandler<PostStatusRequest> implemen
     @Override
     public PostStatusResponse handleRequest(PostStatusRequest postStatusRequest, Context context) {
         validateRequestAndLogReceipt(postStatusRequest);
-        StatusService statusService = new StatusService(new DDBStatusDAO(), new DDBAuthTokenDAO(), new DDBFollowDAO(), new DDBFeedDAO());
-        return statusService.postStatus(postStatusRequest);
+
+        SqsClient.addMessageToQueue(postStatusRequest, SqsClient.POSTS_Q);
+        return new PostStatusResponse();
+
+//        StatusService statusService = new StatusService(new DDBStatusDAO(), new DDBAuthTokenDAO(), new DDBFollowDAO(), new DDBFeedDAO());
+//        return statusService.postStatus(postStatusRequest);
     }
 
     @Override

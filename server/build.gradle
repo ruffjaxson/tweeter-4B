@@ -24,19 +24,15 @@ dependencies {
     implementation group: 'software.amazon.awssdk', name: 'dynamodb-enhanced', version: '2.18.21'
     implementation group: 'software.amazon.awssdk', name: 'dynamodb', version: '2.18.21'
     implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.12.608'
-//    implementation group: 'software.amazon.awssdk', name: 'dynamodb-enhanced', version: '2.20.47'
-//    implementation group: 'software.amazon.awssdk', name: 'dynamodb', version: '2.20.47'
-//    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
-//    implementation group: 'software.amazon.awssdk', name: 'dynamodb-enhanced', version: '2.20.47'
 
-//    implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.12.599' // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3
-//
-//
-//    // Password hashing dependencies
+    // SQS
+    implementation group: 'com.amazonaws', name:'aws-lambda-java-events', version:'3.7.0'
+    implementation group: 'com.amazonaws', name:'aws-java-sdk-sqs', version:'1.11.977'
+
+    // Password hashing dependencies
     implementation 'org.springframework.security:spring-security-core:5.7.1'
 
     // Testing related dependencies
-
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.2"
 

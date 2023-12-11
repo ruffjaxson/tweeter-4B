@@ -13,6 +13,4 @@ public class FollowFetcher implements RequestHandler<SQSEvent, Void> {
         return null;
     }
 
-//     SQS
-//    implementation group: 'com.amazonaws', name:'aws-lambda-java-events', version:'3.7.0'
 }

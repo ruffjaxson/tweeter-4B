@@ -2,12 +2,13 @@
 
 # Function to update Lambda function code
 update_lambda_code() {
-  aws lambda update-function-code --function-name "$1" --zip-file "fileb:///Users/jaxsonruff/340/tweeter-4/server/build/libs/server-all.jar" &
+  aws lambda update-function-code --function-name "$1" --zip-file "fileb:///Users/jaxsonruff/340/tweeter-4B/server/build/libs/server-all.jar" &
 }
 
 # Array of common prefixes for Lambda function ARNs
 common_prefix="arn:aws:lambda:us-west-2:300626769705:function:"
 functions=(
+  "fetch_follows"
   "login"
   "logout"
   "register"
