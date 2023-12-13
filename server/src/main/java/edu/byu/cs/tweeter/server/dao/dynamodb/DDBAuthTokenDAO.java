@@ -18,7 +18,6 @@ public class DDBAuthTokenDAO extends DynamoDAO<AuthTokens> implements AuthTokenD
 
     public DDBAuthTokenDAO() {
         super(AuthTokens.class, AuthTokens.TABLE_NAME, null);
-        System.out.println("In DDBAuthTokenDAO constructor");
     }
 
     @Override

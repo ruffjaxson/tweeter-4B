@@ -9,6 +9,7 @@ update_lambda_code() {
 common_prefix="arn:aws:lambda:us-west-2:300626769705:function:"
 functions=(
   "fetch_follows"
+  "job_handler"
   "login"
   "logout"
   "register"
@@ -32,11 +33,13 @@ if [ "$#" -eq 0 ]; then
   for function_name in "${functions[@]}"; do
     echo "$function_name"
     update_lambda_code "$common_prefix$function_name"
+    sleep 2
   done
 else
   echo "Update specific Lambda functions based on parameters"
   for param in "$@"; do
     echo "$param"
     update_lambda_code "$common_prefix$param"
+    sleep 1
   done
 fi

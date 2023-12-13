@@ -3,6 +3,7 @@ package edu.byu.cs.tweeter.server.service;
 import java.util.List;
 
 import edu.byu.cs.tweeter.model.domain.Status;
+import edu.byu.cs.tweeter.model.domain.User;
 import edu.byu.cs.tweeter.model.net.request.PagedRequest;
 import edu.byu.cs.tweeter.model.net.request.PostStatusRequest;
 import edu.byu.cs.tweeter.model.net.response.GetStatusesResponse;
@@ -43,10 +44,13 @@ public class StatusService extends Service {
     public PostStatusResponse postStatus(PostStatusRequest request) {
         if (isAuthTokenInvalid(request.getAuthToken())) { return new PostStatusResponse(AUTHENTICATION_FAILED_MESSAGE);}
         statusDao.postStatus(request.getStatus());
-        List<String> followerAliases = followDao.getAllFollowerAliases(request.getUserAlias());
-        feedDao.postStatusToAllFollowersFeeds(followerAliases, request.getStatus());
+//        List<String> followerAliases = followDao.getAllFollowerAliases(request.getUserAlias());
+//        feedDao.postStatusToAllFollowersFeeds(followerAliases, request.getStatus());
 
         return new PostStatusResponse();
     }
 
+    public void postStatusToFeeds(Status status, List<User> followers) {
+        feedDao.postStatusToAllFollowersFeeds(followers, status);
+    }
 }

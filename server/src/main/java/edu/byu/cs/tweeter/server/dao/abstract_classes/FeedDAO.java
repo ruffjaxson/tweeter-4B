@@ -9,5 +9,5 @@ import edu.byu.cs.tweeter.server.models.DataPage;
 public interface FeedDAO {
     DataPage<Status> getFeed(User targetUser, int limit, Status lastStatus);
 
-    void postStatusToAllFollowersFeeds(List<String> followerAliases, Status status);
+    void postStatusToAllFollowersFeeds(List<User> followerAliases, Status status);
 }

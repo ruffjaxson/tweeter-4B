@@ -24,17 +24,18 @@ public class DDBFeedDAO extends DynamoDAO<Feeds> implements FeedDAO {
     public DataPage<Status> getFeed(User targetUser, int limit, Status lastStatus) {
         this.targetUser = targetUser;
         statusList.clear();
-        boolean hasMoreItems = getItems(targetUser.getAlias(), lastStatus == null ? null : lastStatus.getSortHash(), limit, lastStatus == null ? null : new Feeds(targetUser.getAlias(), lastStatus), false);
+        boolean hasMoreItems = getItems(targetUser.getAlias(), lastStatus == null ? null : lastStatus.getSortHash(), limit, lastStatus == null ? null : new Feeds(targetUser.getAlias(), lastStatus), false, true, false);
         return new DataPage<>(statusList, hasMoreItems);
     }
 
     @Override
-    public void postStatusToAllFollowersFeeds(List<String> followerAliases, Status status) {
-//        TODO: BATCH WRITE
-        System.out.println("Posting status: " + status + " to followers: " + followerAliases);
-        for (String followerAlias : followerAliases) {
-            postToFeed(followerAlias, status);
+    public void postStatusToAllFollowersFeeds(List<User> followers, Status status) {
+        System.out.println("Posting status: " + status + " to followers: " + followers);
+        List<Feeds> feeds = new ArrayList<>();
+        for (User follower : followers) {
+            feeds.add(new Feeds(follower.getAlias(), status));
         }
+        createBatchesAndThenWrite(feeds);
     }
 
 
@@ -43,6 +44,8 @@ public class DDBFeedDAO extends DynamoDAO<Feeds> implements FeedDAO {
         Feeds f = new Feeds(feedOwnerAlias, status);
         createOrOverwrite(f);
     }
+
+
 
 
     @Override
