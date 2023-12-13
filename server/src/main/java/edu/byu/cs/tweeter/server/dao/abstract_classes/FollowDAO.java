@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.byu.cs.tweeter.model.domain.Status;
 import edu.byu.cs.tweeter.model.domain.User;
+import edu.byu.cs.tweeter.server.dao.dynamodb.tables.Follows;
 import edu.byu.cs.tweeter.server.models.DataPage;
 
 public interface FollowDAO {
@@ -12,6 +13,6 @@ public interface FollowDAO {
     boolean isFollower(User follower, User followee);
     DataPage <User> getFollowing(User follower, int limit, User lastFollowee);
     DataPage<User> getFollowers(User followee, int limit, User lastFollower);
-    List<String> getAllFollowerAliases(String userAlias);
-
+//    List<String> getAllFollowerAliases(String userAlias);
+    void addFollowsBatch(List<Follows> follows);
 }

@@ -8,6 +8,7 @@ import com.amazonaws.services.sqs.model.SendMessageResult;
 
 public class SqsClient {
     public static final String POSTS_Q = "https://sqs.us-west-2.amazonaws.com/300626769705/PostsQ";
+    public static final String JOBS_Q = "https://sqs.us-west-2.amazonaws.com/300626769705/JobsQ";
     public static void addMessageToQueue(Object objToSend, String queueUrl) {
 
 

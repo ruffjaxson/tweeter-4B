@@ -69,7 +69,7 @@ public class PostStatusRequest{
     public String toString() {
         return "PostStatusRequest{" +
                 "userAlias='" + userAlias + '\'' +
-                ", status=" + status.hashCode() +
+                ", status=" + status +
                 '}';
     }
 }

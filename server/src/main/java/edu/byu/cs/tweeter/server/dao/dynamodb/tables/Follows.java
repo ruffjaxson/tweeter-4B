@@ -9,8 +9,8 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.*;
 public class Follows extends Table {
     public static final String TABLE_NAME = "follows";
     public static final String INDEX_NAME = "follows_index";
-    public static final String PARTITION_KEY = "followerAlias";
-    public static final String SORT_KEY = "followeeAlias";
+    public static final String PARTITION_KEY = "followerHandle";
+    public static final String SORT_KEY = "followeeHandle";
 
     private String followerHandle;
     private String followerFirstName;

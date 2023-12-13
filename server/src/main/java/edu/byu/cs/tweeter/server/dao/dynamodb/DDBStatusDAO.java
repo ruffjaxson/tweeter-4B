@@ -24,7 +24,7 @@ public class DDBStatusDAO extends DynamoDAO<Stories> implements StatusDAO {
     public DataPage<Status> getStory(User targetUser, int limit, Status lastStatus) {
         this.targetUser = targetUser;
         statusList.clear();
-        boolean hasMoreItems = getItems(targetUser.getAlias(), null, limit, lastStatus == null ? null : new Stories(lastStatus), false);
+        boolean hasMoreItems = getItems(targetUser.getAlias(), null, limit, lastStatus == null ? null : new Stories(lastStatus), false, true, false);
         return new DataPage<>(statusList, hasMoreItems);
     }
 

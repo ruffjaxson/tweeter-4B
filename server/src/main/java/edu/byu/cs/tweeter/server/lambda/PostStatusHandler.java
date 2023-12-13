@@ -23,12 +23,10 @@ public class PostStatusHandler extends ServerHandler<PostStatusRequest> implemen
     @Override
     public PostStatusResponse handleRequest(PostStatusRequest postStatusRequest, Context context) {
         validateRequestAndLogReceipt(postStatusRequest);
-
         SqsClient.addMessageToQueue(postStatusRequest, SqsClient.POSTS_Q);
-        return new PostStatusResponse();
 
-//        StatusService statusService = new StatusService(new DDBStatusDAO(), new DDBAuthTokenDAO(), new DDBFollowDAO(), new DDBFeedDAO());
-//        return statusService.postStatus(postStatusRequest);
+        StatusService statusService = new StatusService(new DDBStatusDAO(), new DDBAuthTokenDAO(), new DDBFollowDAO(), new DDBFeedDAO());
+        return statusService.postStatus(postStatusRequest);
     }
 
     @Override

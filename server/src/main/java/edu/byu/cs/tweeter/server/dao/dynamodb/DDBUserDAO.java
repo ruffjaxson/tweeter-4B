@@ -3,6 +3,7 @@ package edu.byu.cs.tweeter.server.dao.dynamodb;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import edu.byu.cs.tweeter.model.domain.User;
@@ -17,7 +18,6 @@ public class DDBUserDAO extends DynamoDAO<Users> implements UserDAO {
 
     public DDBUserDAO(){
         super(Users.class, Users.TABLE_NAME,  null);
-        System.out.println("In DDBUserDAO constructor");
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
@@ -77,6 +77,11 @@ public class DDBUserDAO extends DynamoDAO<Users> implements UserDAO {
         updateObject.put(UPDATE_FOLLOWEE_COUNT_KEY, amount);
         updateObject.put(UPDATE_FOLLOWER_COUNT_KEY, 0);
         update(userAlias, null, updateObject);
+    }
+
+    @Override
+    public void addUserBatch(List<Users> userList) {
+        createBatchesAndThenWrite(userList);
     }
 
     @Override
