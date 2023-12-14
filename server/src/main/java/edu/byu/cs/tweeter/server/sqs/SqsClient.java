@@ -12,8 +12,8 @@ public class SqsClient {
     public static void addMessageToQueue(Object objToSend, String queueUrl) {
 
 
-        System.out.println("queueUrl:" + queueUrl);
-        System.out.println("Attempting to add the following objToSend to: " + objToSend);
+//        System.out.println("queueUrl:" + queueUrl);
+//        System.out.println("Attempting to add the following objToSend to: " + objToSend);
         SendMessageRequest send_msg_request = new SendMessageRequest()
                 .withQueueUrl(queueUrl)
                 .withMessageBody(JsonSerializer.serialize(objToSend));
@@ -21,6 +21,6 @@ public class SqsClient {
         AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
         SendMessageResult send_msg_result = sqs.sendMessage(send_msg_request);
         String msgId = send_msg_result.getMessageId();
-        System.out.println("Message ID: " + msgId);
+//        System.out.println("Message ID: " + msgId);
     }
 } 

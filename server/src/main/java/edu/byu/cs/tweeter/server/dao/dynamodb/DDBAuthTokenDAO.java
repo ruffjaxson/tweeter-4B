@@ -22,7 +22,7 @@ public class DDBAuthTokenDAO extends DynamoDAO<AuthTokens> implements AuthTokenD
 
     @Override
     public AuthToken create() {
-        System.out.println("In AuthToken create()");
+//        System.out.println("In AuthToken create()");
         byte[] randomBytes = new byte[24];
         secureRandom.nextBytes(randomBytes);
         String token = base64Encoder.encodeToString(randomBytes);
@@ -33,7 +33,7 @@ public class DDBAuthTokenDAO extends DynamoDAO<AuthTokens> implements AuthTokenD
 
     @Override
     public boolean verify(AuthToken authToken) {
-        System.out.println("In AuthToken verify()");
+//        System.out.println("In AuthToken verify()");
 
         AuthTokens ddbAuthToken = find(authToken.getToken(), null);
         if (ddbAuthToken == null) return false;
@@ -47,7 +47,7 @@ public class DDBAuthTokenDAO extends DynamoDAO<AuthTokens> implements AuthTokenD
 
     @Override
     public AuthToken renew(AuthToken authToken) {
-        System.out.println("In AuthToken create()");
+//        System.out.println("In AuthToken create()");
         AuthTokens token = new AuthTokens(authToken.getToken(), authToken.getTimestamp());
         // TODO: LOOK INTO WHY THE RENEWED AUTH TOKEN DOESN'T SEEM TO MAKE IT BACK TO THE CLIENT
         token.renewTimestamp();
@@ -57,7 +57,7 @@ public class DDBAuthTokenDAO extends DynamoDAO<AuthTokens> implements AuthTokenD
 
     @Override
     public void deleteToken(AuthToken authToken) {
-        System.out.println("In AuthToken delete()");
+//        System.out.println("In AuthToken delete()");
         delete(new AuthTokens(authToken.getToken(), authToken.getTimestamp()));
     }
 

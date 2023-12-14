@@ -23,9 +23,9 @@ public class JobHandler implements RequestHandler<SQSEvent, Void> {
     public Void handleRequest(SQSEvent event, Context context) {
         for (SQSEvent.SQSMessage msg : event.getRecords()) {
             UpdateFeedsRequest request = JsonSerializer.deserialize(msg.getBody(), UpdateFeedsRequest.class);
+            System.out.println("JobHandler: " + request.getFollowers().size() + " - " + (request.getFollowers().size() > 0 ? request.getFollowers().get(request.getFollowers().size() - 1) : null));
 
             service.postStatusToFeeds(request.getStatus(), request.getFollowers());
-            System.out.println("request: " + request.toString());
         }
         return null;
     }

@@ -55,10 +55,10 @@ public abstract class DynamoDAO<T extends Table> {
            key = buildKey(newEntry.partitionValue(), newEntry.sortValue());
            getExistingValue();
            if (existingEntry == null) {
-               System.out.println("Saving new item:" + newEntry);
+//               System.out.println("Saving new item:" + newEntry);
                table.putItem(newEntry);
            } else {
-               System.out.println("Updating item:" + newEntry);
+//               System.out.println("Updating item:" + newEntry);
                table.updateItem(newEntry);
            }
        }catch (Exception e){
@@ -71,7 +71,7 @@ public abstract class DynamoDAO<T extends Table> {
             key = buildKey(partitionValue, sortValue);
             getExistingValue();
             changeRecordBeforeUpdate(existingEntry, updateMap);
-            System.out.println("Updating record to:" + existingEntry);
+//            System.out.println("Updating record to:" + existingEntry);
             table.updateItem(existingEntry);
         }catch (Exception e){
             throw new RuntimeException("[Server Error] Error thrown while performing createOrUpdate for " + " in database (partitionValue=" + partitionValue + ", sortKey=" + sortValue + "): " + e.getMessage());
@@ -81,7 +81,7 @@ public abstract class DynamoDAO<T extends Table> {
    public void delete(T entry) {
        try{
            key = buildKey(entry.partitionValue(), entry.sortValue());
-           System.out.println("Deleting item (if it exists): " + entry);
+//           System.out.println("Deleting item (if it exists): " + entry);
            table.deleteItem(key);
        }catch (Exception e){
            throw new RuntimeException("[DAO Error] Error thrown while deleting "  + " from database (partitionValue=" + entry.partitionValue() + ", sortValue=" + entry.sortValue() + "): " + e.getMessage());
@@ -146,7 +146,7 @@ public abstract class DynamoDAO<T extends Table> {
 //    ==============================================================================================
 
     public void createBatchesAndThenWrite(List<T> items) {
-       System.out.println("Adding batch");
+//       System.out.println("Adding batch");
         List<T> batchToWrite = new ArrayList<>();
         for (T u : items) {
             batchToWrite.add(u);
@@ -167,7 +167,7 @@ public abstract class DynamoDAO<T extends Table> {
     private void writeChunk(List<T> items) {
         if(items.size() > 25)
             throw new RuntimeException("Too many items to write");
-        System.out.println("Writing chunk of size: " + items.size());
+//        System.out.println("Writing chunk of size: " + items.size());
 
         WriteBatch.Builder<T> writeBuilder = WriteBatch.builder(TABLE_CLASS).mappedTableResource(table);
         for (T item : items) {
@@ -178,11 +178,11 @@ public abstract class DynamoDAO<T extends Table> {
 
         try {
             BatchWriteResult result = enhancedClient.batchWriteItem(batchWriteItemEnhancedRequest);
-            System.out.println("Successful write.." + items.get(0).partitionValue());
+//            System.out.println("Successful write.." + items.get(0).partitionValue());
             // just hammer dynamodb again with anything that didn't get written this time
             if (result.unprocessedPutItemsForTable(table).size() > 0) {
                 writeChunk(result.unprocessedPutItemsForTable(table));
-                System.out.println("Just hammering out some more" + result.unprocessedPutItemsForTable(table).size());
+                System.out.println("Just hammering out some more: " + result.unprocessedPutItemsForTable(table).size());
             }
 
         } catch (DynamoDbException e) {
@@ -197,7 +197,7 @@ public abstract class DynamoDAO<T extends Table> {
 
     private T getExistingValue(){
        existingEntry = table.getItem(key);
-       System.out.println("Existing entry: " + existingEntry);
+//       System.out.println("Existing entry: " + existingEntry);
        return existingEntry;
    }
 

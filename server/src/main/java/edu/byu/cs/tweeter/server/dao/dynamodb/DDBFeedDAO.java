@@ -30,7 +30,7 @@ public class DDBFeedDAO extends DynamoDAO<Feeds> implements FeedDAO {
 
     @Override
     public void postStatusToAllFollowersFeeds(List<User> followers, Status status) {
-        System.out.println("Posting status: " + status + " to followers: " + followers);
+//        System.out.println("Posting status: " + status + " to followers: " + followers);
         List<Feeds> feeds = new ArrayList<>();
         for (User follower : followers) {
             feeds.add(new Feeds(follower.getAlias(), status));

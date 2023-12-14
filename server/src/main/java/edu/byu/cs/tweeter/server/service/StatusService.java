@@ -46,7 +46,6 @@ public class StatusService extends Service {
         statusDao.postStatus(request.getStatus());
 //        List<String> followerAliases = followDao.getAllFollowerAliases(request.getUserAlias());
 //        feedDao.postStatusToAllFollowersFeeds(followerAliases, request.getStatus());
-
         return new PostStatusResponse();
     }
 

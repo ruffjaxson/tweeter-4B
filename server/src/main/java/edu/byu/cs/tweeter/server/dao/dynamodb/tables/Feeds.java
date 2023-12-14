@@ -41,7 +41,7 @@ public class Feeds extends Table {
         this.timestampString = Instant.ofEpochSecond(s.getTimestamp()).toString();
         this.urls = s.getUrls();
         this.mentionedAliases = s.getMentions();
-        this.sortingHash = timestamp.toString() + postUserAlias + ": " + postText;
+        this.sortingHash = timestamp.toString() + postUserAlias + ":" + postText;
         this.postUserAlias = poster.getAlias();
         this.postUserFirstName = poster.getFirstName();
         this.postUserLastName = poster.getLastName();

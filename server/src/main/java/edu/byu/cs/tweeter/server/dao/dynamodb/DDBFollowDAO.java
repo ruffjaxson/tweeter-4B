@@ -53,11 +53,11 @@ public class DDBFollowDAO extends DynamoDAO<Follows> implements FollowDAO {
 
     public DataPage<User> getFollowers(User followee, int limit, User lastFollower) {
         followersList.clear();
-        System.out.println("Retrieving followers with lastFollower:" + lastFollower);
+//        System.out.println("Retrieving followers with lastFollower:" + lastFollower);
 //        boolean hasMorePages = getItems(followee.getAlias(), null, limit, lastFollower == null ? null : new Follows(lastFollower, followee), true, false, true);
 //        return new DataPage<>(followersList, hasMorePages);
         DataPage<User> result = getFollowers(followee.getAlias(), limit, lastFollower == null ? null : lastFollower.getAlias());
-        System.out.println("returning followers:" + result.getValues());
+//        System.out.println("returning followers:" + result.getValues());
         return result;
     }
 

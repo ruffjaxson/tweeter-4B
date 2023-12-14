@@ -31,7 +31,6 @@ public class DDBStatusDAO extends DynamoDAO<Stories> implements StatusDAO {
     public void postStatus(Status status) {
         Stories s = new Stories(status);
         createOrOverwrite(s);
-        // TODO: UPDATE ALL FOLLOWERS' FEEDS
     }
 
 
