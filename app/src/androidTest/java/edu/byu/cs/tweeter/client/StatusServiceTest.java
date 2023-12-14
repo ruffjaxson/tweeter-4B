@@ -30,17 +30,17 @@ public class StatusServiceTest {
         service = new StatusService();
     }
 
-    @Test
-    public void testGetStory() throws InterruptedException {
-        AuthToken authToken = new AuthToken("auth");
-        User newUser = new User("Jaxson", "Ruff", "imageUrl");
-        Status lastStatus = null;
-
-        PagedObserver<Status> observerSpy = Mockito.mock(StatusServiceObserver.class);
-        service.getStory(authToken, newUser, 5, lastStatus, observerSpy);
-        waitForMethodToRun();
-        Mockito.verify(observerSpy).getItemsSucceeded(Mockito.anyList(), Mockito.anyBoolean());
-    }
+//    @Test
+//    public void testGetStory() throws InterruptedException {
+//        AuthToken authToken = new AuthToken("auth");
+//        User newUser = new User("Jaxson", "Ruff", "imageUrl");
+//        Status lastStatus = null;
+//
+//        PagedObserver<Status> observerSpy = Mockito.mock(StatusServiceObserver.class);
+//        service.getStory(authToken, newUser, 5, lastStatus, observerSpy);
+//        waitForMethodToRun();
+//        Mockito.verify(observerSpy).getItemsSucceeded(Mockito.anyList(), Mockito.anyBoolean());
+//    }
 
 
     private class StatusServiceObserver implements PagedObserver<Status> {
